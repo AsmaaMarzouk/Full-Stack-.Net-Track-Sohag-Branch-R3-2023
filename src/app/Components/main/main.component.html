@@ -1,1 +1,27 @@
-<h1>Hello World!!!!!</h1>
+<!-- <h1>Hello World!!!!!</h1> -->
+
+<!-- Data binding -->
+<!-- interpolation => {{}} -->
+<p>For Test data model class</p>
+<h1>{{trackClass.trackName}}</h1>
+<img src="{{trackClass.trackImg}}" width="300" height="300">
+
+<!-- <p>{{trackClass.trackCourses[0]}}</p>
+<p>{{trackClass.trackCourses[1]}}</p>
+<p>{{trackClass.trackCourses[2]}}</p> -->
+
+
+<!-- *ngFor => for of => for(let item of arrayName){item}-->
+<h2 *ngFor="let item of trackClass.trackCourses">{{item}}</h2>
+
+<p>For Test data model interface</p>
+<h1>{{track.trackName}}</h1>
+<h2>Track Number: {{track.trackNum}}</h2>
+<ul>
+  <li *ngFor="let course of track.courses">{{course}}</li>
+</ul>
+
+
+<h3>
+  {{sayHello()}}
+</h3>
