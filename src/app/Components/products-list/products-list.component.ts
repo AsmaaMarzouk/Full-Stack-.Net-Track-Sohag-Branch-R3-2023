@@ -7,6 +7,11 @@ import { Iproduct } from 'src/app/Models/iproduct';
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
+  // ############################
+  date1:Date = new Date();
+  // date2:number=Date.now();
+  // date3:string=new Date().toDateString();
+  // ############################
   // intialize
   // constructor
   // 1-intialize data & 2-inject

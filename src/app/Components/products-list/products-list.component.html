@@ -1,3 +1,8 @@
+<!-- Date Pipe -->
+<!-- <h2>{{date1|date:'short'}}</h2> -->
+<h2>{{date1|date:'fullDate'}}</h2>
+
+<!-- ################### -->
 <!-- Event binding -->
 <button class="btn btn-primary mb-3" (click)="toggleImage()">Image</button>
 
@@ -14,30 +19,60 @@
     <!-- <input type="text" class="form-control" [value]="x"> -->
     <input type="text" class="form-control" [(ngModel)]="listFilter">
   </div>
-<div class="row">
-  <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-6">
 
-   <h4>Value of Filter By Name:{{listFilter}}</h4>
+      <h4>Value of Filter By Name:{{listFilter}}</h4>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- ################################ -->
 <div class="row">
 
   <!-- class binding & style binding -->
-  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [class.text-danger]="product.price>10000"> -->
-    <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [class.test]="product.price>10000"> -->
-      <!-- ternary operator => condition?true:false -->
-      <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [style.color]="(product.price>10000)?'red':'blue'"> -->
-        <div class="col-sm-4 mb-4" *ngFor="let product of filteredProducts">
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [class.text-danger]="product.price>10000" > -->
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [class.test]="product.price>10000"> -->
+  <!-- ternary operator => condition?true:false -->
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of productsList" [style.color]="(product.price>10000)?'red':'blue'"> -->
 
-    <!-- <img src="{{product.PrdImgURL}}" class="img-fluid" alt="img"> -->
-    <img [src]="product.PrdImgURL" class="img-fluid" alt="img" *ngIf="Img">
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of filteredProducts"> -->
+  <!-- Day3 -->
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of filteredProducts" [ngClass]="{'text-danger':product.price>10000,'bg-info':product.quantity==0}"> -->
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of filteredProducts" [ngStyle]="{'color':(product.price>14000)?'red':'blue','background-color':(product.quantity==0)?'lightgray':'lightblue'}"> -->
 
-    <h4>{{product.name}}</h4>
-    <h5>{{product.price}}</h5>
-    <button class="btn btn-danger" [disabled]="product.quantity==0">Add To Cart<i
-        class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
-  </div>
+  <!-- virtual containers -->
+  <!-- ng-container & ng-template  -->
+  <!-- <div class="col-sm-4 mb-4" *ngFor="let product of filteredProducts" *ngIf="product.price>10000">Error -->
+
+
+  <ng-container *ngFor="let product of filteredProducts">
+    <!-- <div class="col-sm-4 mb-4" *ngIf="product.price>10000"> -->
+    <div class="col-sm-4 mb-4">
+
+      <!-- <img src="{{product.PrdImgURL}}" class="img-fluid" alt="img"> -->
+      <img [src]="product.PrdImgURL" class="img-fluid" alt="img" *ngIf="Img" ImgStyle="10px" radius1="40px">
+      <h4>{{product.name|uppercase}}</h4>
+      <h5 class="text-decoration-line-through">{{product.price|currency:'USD':'symbol'}}</h5>
+      <!-- <h5>{{product.price|currency:'EUR':'code'}}</h5> -->
+      <h5>{{product.price|calcDiscount:50|currency:'USD':'symbol'}}</h5>
+
+      <div>
+        <ng-container [ngSwitch]="product.categoryID">
+          <ng-container *ngSwitchCase="1">Tables</ng-container>
+          <ng-container *ngSwitchCase="2">Chairs</ng-container>
+          <ng-container *ngSwitchCase="3">TV Unit</ng-container>
+        </ng-container>
+      </div>
+      <div>
+        <ng-container *ngIf="product.quantity>0;else outofstockRef">In Stock</ng-container>
+        <!-- template reference => #anyReferenceName -->
+        <!-- <ng-template #outofstockRef><h3 class="text-danger">Out Of Stock</h3></ng-template> -->
+        <ng-template #outofstockRef>Out Of Stock</ng-template>
+
+      </div>
+      <button class="btn btn-danger" [disabled]="product.quantity==0">Add To Cart<i
+          class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
+    </div>
+  </ng-container>
 </div>
