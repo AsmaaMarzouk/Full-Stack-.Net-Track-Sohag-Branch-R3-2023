@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+// Day5
 @Component({
   selector: 'app-user-reactive-form',
   templateUrl: './user-reactive-form.component.html',
@@ -28,6 +28,14 @@ get firstName(){
 get lastName(){
   return this.userForm.get('lastName');
 }
+
+
+
+
+
+
+
+
 
 add(){
   // userservice

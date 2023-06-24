@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class ProductsWithApiService {
-
+// Day5
   constructor(private httpclient:HttpClient) { }
   getAllPrds():Observable<Iproduct[]>{
     // return this.httpclient.get<Iproduct[]>("http://localhost:3000/products");
